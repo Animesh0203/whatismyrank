@@ -1,0 +1,10 @@
+{
+    "editor.formatOnType": true,
+    "[lisp]": {
+        "editor.wordSeparators": "`|;:'\",()"
+    },
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.autopep8"
+    },
+    "python.formatting.provider": "none"
+}
