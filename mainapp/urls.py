@@ -7,4 +7,9 @@ urlpatterns = [
     #path('register/', views.create, name='register'),
     path('logout/', views.logout_view, name='logout'), 
     path('register/', views.register_user, name='register_user'),
+<<<<<<< Updated upstream
+=======
+    path('submit/',views.get_id,name='submit'),
+
+>>>>>>> Stashed changes
 ]
