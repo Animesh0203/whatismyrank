@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from .forms import fetch
+from .models import links
 from .forms import SignUpForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
@@ -36,8 +38,6 @@ def logout_view(request):
     logout(request)
     return redirect('homepage')
 
-<<<<<<< Updated upstream
-=======
 def login_view(request):
     context = {}
 
@@ -68,31 +68,26 @@ def login_view(request):
 
 
 def get_id(request):
->>>>>>> Stashed changes
 
-def login_view(request):
-    context = {}
+	if request.method == 'POST':
 
-    user = request.user
-    if user.is_authenticated:
-        return redirect("homepage")
+		request.POST._mutable=True
+		request.POST['link'] = request.POST['link'].replace('https://www.youtube.com/watch?v=','')
 
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password1']  # Use 'password1' instead of 'password'
-            user = authenticate(email=email, password=password)
+		form = fetch(request.POST)
 
-            if user:
-                login(request, user)
-                return redirect("homepage")
-            else:
-                context['error_message'] = "Invalid email or password."
-        else:
-            context['error_message'] = "Please correct the errors below."
-    else:
-        form = LoginForm()
+		if form.is_valid():
 
-    context['form'] = form
-    return render(request, 'mainapp/register.html', context)
+			form = form.cleaned_data
+
+			obj = links()
+			obj.link = form['link']
+		
+		obj.save()
+		form = fetch()
+	
+	else:
+
+		form = fetch()
+
+	return render(request,'mainapp/submit.html',{'form':form})
