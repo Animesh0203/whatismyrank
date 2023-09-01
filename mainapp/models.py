@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
-class links(models.Model):
-	link = models.CharField(max_length=100)
 # Create your models here.
 class MyAccountManager(BaseUserManager):
 	def create_user(self, email, username, password=None):
@@ -56,3 +54,6 @@ class Account(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
+	
+class links(models.Model):
+	link = models.CharField(max_length=100)

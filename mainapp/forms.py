@@ -1,5 +1,10 @@
 from django import forms
 from .models import links
+        
+from django.contrib.auth.forms import UserCreationForm
+from mainapp.models import Account
+from django.forms import ModelForm, TextInput, EmailInput
+from django.contrib.auth import authenticate
 
 class MyForm(forms.Form):
     name = forms.CharField(max_length=100)
@@ -9,10 +14,7 @@ class fetch(forms.Form):
     link = forms.CharField(max_length=100)
     class Meta:
         model = links
-from django.contrib.auth.forms import UserCreationForm
-from mainapp.models import Account
-from django.forms import ModelForm, TextInput, EmailInput
-from django.contrib.auth import authenticate
+
 
 class SignUpForm(UserCreationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username', 'style': 'width: 300px;', 'class': 'flip-card__input'}))
