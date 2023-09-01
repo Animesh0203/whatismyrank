@@ -6,4 +6,11 @@ urlpatterns = [
     path('',views.homepage),
     path('submit/',views.get_id,name='submit'),
 
+    path('', views.homepage, name="homepage"),
+    path('login/', views.login_view, name='login'),  
+    #path('register/', views.create, name='register'),
+    path('logout/', views.logout_view, name='logout'), 
+    path('register/', views.register_user, name='register_user'),
+    path('submit/',views.get_id,name='submit'),
+
 ]

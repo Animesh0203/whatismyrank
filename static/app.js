@@ -1,46 +1,46 @@
-document.addEventListener("DOMContentLoaded", function(event) {
+document.addEventListener("DOMContentLoaded", function (event) {
 
-   
-  
-    /*===== LINK ACTIVE =====*/
-    const linkColor = document.querySelectorAll('.nav_link')    
-    function colorLink(){
-    if(linkColor){
-    linkColor.forEach(l=> l.classList.remove('active'))
-    this.classList.add('active')
-    }
-    }
-    linkColor.forEach(l=> l.addEventListener('click', colorLink))   
-     // Your code to run since DOM is loaded and ready
-    });
 
-$(window).load(function(){
+
+	/*===== LINK ACTIVE =====*/
+	const linkColor = document.querySelectorAll('.nav_link')
+	function colorLink() {
+		if (linkColor) {
+			linkColor.forEach(l => l.classList.remove('active'))
+			this.classList.add('active')
+		}
+	}
+	linkColor.forEach(l => l.addEventListener('click', colorLink))
+	// Your code to run since DOM is loaded and ready
+});
+
+$(window).load(function () {
 	var height = window.innerHeight,
-  x= 0, y= height/2,
-	curveX = 10,
-	curveY = 0,
-	targetX = 0,
-	xitteration = 0,
-	yitteration = 0,
-	menuExpanded = false;
-	
+		x = 0, y = height / 2,
+		curveX = 10,
+		curveY = 0,
+		targetX = 0,
+		xitteration = 0,
+		yitteration = 0,
+		menuExpanded = false;
+
 	blob = $('#blob'),
-	blobPath = $('#blob-path'),
+		blobPath = $('#blob-path'),
 
-	hamburger = $('.hamburger');
+		hamburger = $('.hamburger');
 
-	$(this).on('mousemove', function(e){
+	$(this).on('mousemove', function (e) {
 		x = e.pageX;
-		
+
 		y = e.pageY;
 	});
 
-	$('.hamburger, .menu-inner').on('mouseenter', function(){
+	$('.hamburger, .menu-inner').on('mouseenter', function () {
 		$(this).parent().addClass('expanded');
 		menuExpanded = true;
 	});
 
-	$('.menu-inner').on('mouseleave', function(){
+	$('.menu-inner').on('mouseleave', function () {
 		menuExpanded = false;
 		$(this).parent().removeClass('expanded');
 	});
@@ -51,9 +51,9 @@ $(window).load(function(){
 
 	var hoverZone = 150;
 	var expandAmount = 20;
-	
+
 	function svgCurve() {
-		if ((curveX > x-1) && (curveX < x+1)) {
+		if ((curveX > x - 1) && (curveX < x + 1)) {
 			xitteration = 0;
 		} else {
 			if (menuExpanded) {
@@ -63,62 +63,38 @@ $(window).load(function(){
 				if (x > hoverZone) {
 					targetX = 0;
 				} else {
-					targetX = -(((60+expandAmount)/100)*(x-hoverZone));
-				}			
+					targetX = -(((60 + expandAmount) / 100) * (x - hoverZone));
+				}
 			}
 			xitteration++;
 		}
 
-		if ((curveY > y-1) && (curveY < y+1)) {
+		if ((curveY > y - 1) && (curveY < y + 1)) {
 			yitteration = 0;
 		} else {
 			yitteration = 0;
-			yitteration++;	
+			yitteration++;
 		}
 
-		curveX = easeOutExpo(xitteration, curveX, targetX-curveX, 100);
-		curveY = easeOutExpo(yitteration, curveY, y-curveY, 100);
+		curveX = easeOutExpo(xitteration, curveX, targetX - curveX, 100);
+		curveY = easeOutExpo(yitteration, curveY, y - curveY, 100);
 
 		var anchorDistance = 200;
 		var curviness = anchorDistance - 40;
 
-		var newCurve2 = "M60,"+height+"H0V0h60v"+(curveY-anchorDistance)+"c0,"+curviness+","+curveX+","+curviness+","+curveX+","+anchorDistance+"S60,"+(curveY)+",60,"+(curveY+(anchorDistance*2))+"V"+height+"z";
+		var newCurve2 = "M60," + height + "H0V0h60v" + (curveY - anchorDistance) + "c0," + curviness + "," + curveX + "," + curviness + "," + curveX + "," + anchorDistance + "S60," + (curveY) + ",60," + (curveY + (anchorDistance * 2)) + "V" + height + "z";
 
 		blobPath.attr('d', newCurve2);
 
-		blob.width(curveX+60);
+		blob.width(curveX + 60);
 
-		hamburger.css('transform', 'translate('+curveX+'px, '+curveY+'px)');
-    
-    $('h2').css('transform', 'translateY('+curveY+'px)');
+		hamburger.css('transform', 'translate(' + curveX + 'px, ' + curveY + 'px)');
+
+		$('h2').css('transform', 'translateY(' + curveY + 'px)');
 		window.requestAnimationFrame(svgCurve);
 	}
 
 	window.requestAnimationFrame(svgCurve);
-	
+
 });
 
-
-
-
-
-document.addEventListener("DOMContentLoaded", function() {
-	const openButton = document.getElementById("authButton");
-	const closeButton = document.getElementById("closeButton");
-	const popup = document.getElementById("popup");
-  
-	openButton.addEventListener("click", () => {
-		popup.style.display = "flex";
-	  });
-	
-	  closeButton.addEventListener("click", () => {
-		popup.style.display = "none";
-	  });
-	
-	  document.addEventListener("click", (event) => {
-		if (!popup.contains(event.target) && event.target !== openButton) {
-		  popup.style.display = "none";
-		}
-	  });
-	});
-  
