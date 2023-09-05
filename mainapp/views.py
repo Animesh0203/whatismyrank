@@ -1,24 +1,24 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import fetch
-from .models import links
+from .models import links, Game
 from .forms import SignUpForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 from django.views import View
 from mainapp.forms import LoginForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordResetView
 from django.contrib.messages.views import SuccessMessageMixin
 
 def homepage(request):
-    return render(request, "mainapp/home.html", {})
-
+    games = Game.objects.all()
+    return render(request, "mainapp/home.html", {'games': games})
 
 def base(response):
     return render(response, "mainapp/base.html", {})
-
 
 def register_user(request):
     if request.method == 'POST':
@@ -42,30 +42,29 @@ def logout_view(request):
     logout(request)
     return redirect('homepage')
 
+@login_required
 def get_id(request):
+    games = Game.objects.all()  # Retrieve all games from the database
 
-	if request.method == 'POST':
+    if request.method == 'POST':
+        request.POST._mutable = True
+        request.POST['link'] = request.POST['link'].replace('https://www.youtube.com/watch?v=', '')
 
-		request.POST._mutable=True
-		request.POST['link'] = request.POST['link'].replace('https://www.youtube.com/watch?v=','')
+        form = fetch(request.POST)
 
-		form = fetch(request.POST)
+        if form.is_valid():
+            cleaned_data = form.cleaned_data
 
-		if form.is_valid():
+            obj = links()
+            obj.link = cleaned_data['link']
+            obj.save()
 
-			form = form.cleaned_data
+            # Create a new empty form for the next submission
+            form = fetch()
+    else:
+        form = fetch()
 
-			obj = links()
-			obj.link = form['link']
-		
-		obj.save()
-		form = fetch()
-	
-	else:
-
-		form = fetch()
-
-	return render(request,'mainapp/submit.html',{'form':form})
+    return render(request, 'mainapp/submit.html', {'form': form, 'games': games})
 
 def login_view(request):
     context = {}
@@ -94,6 +93,10 @@ def login_view(request):
     context['form'] = form
     return render(request, 'mainapp/login.html', context)
 
+@login_required
+def games(request, game_id):
+    return render(request, 'mainapp/games.html', {})
+
 class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
     template_name = 'mainapp/recoverpassword.html'
     email_template_name = 'mainapp/password_reset_email.html'
@@ -103,3 +106,9 @@ class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
                       " If you don't receive an email, " \
                       "please make sure you've entered the address you registered with, and check your spam folder."
     success_url = reverse_lazy(homepage)
+
+
+
+
+
+

@@ -261,6 +261,9 @@ h1 {
   box-shadow: 3px 3px #1d1d1f;
   cursor: pointer;
   scale: 0.75;
+  margin-left:90%;
+  margin-top: 1%;
+  margin-bottom: 1%;
 }
 
 .authButton:active {
@@ -317,7 +320,9 @@ h1 {
   align-items: center;
   justify-content: center;
   min-height: 100vh; /* Ensure the container takes up at least the viewport height */
+  margin-top: -2%;
 }
+
 /* switch card */
 .switch {
   transform: translateY(-200px);
@@ -370,7 +375,7 @@ h1 {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--bg-colorcolor);
+  background-color: var(--bg-color);
   transition: 0.3s;
 }
 
@@ -406,7 +411,6 @@ h1 {
 }
 
 /* card */
-
 .flip-card__inner {
   width: 300px;
   height: 350px;
@@ -416,20 +420,31 @@ h1 {
   /* width: 100%;
     height: 100%; */
   text-align: center;
-  transition: transform 0.8s;
   transform-style: preserve-3d;
+  transition: transform 0.8s;
 }
 
-.toggle:checked ~ .flip-card__inner {
+.flip-card__inner.flipped {
   transform: rotateY(180deg);
-}
-
-.toggle:checked ~ .flip-card__front {
-  box-shadow: none;
 }
 
 .flip-card__front,
 .flip-card__back {
+  padding: 20px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  background: lightgrey;
+  gap: 20px;
+  border-radius: 5px;
+  border: 2px solid var(--main-color);
+  box-shadow: 4px 4px var(--main-color);
+}
+
+.flip-card__front_back{
   padding: 20px;
   position: absolute;
   display: flex;
@@ -510,3 +525,166 @@ h4 {
   color: #fff;
 }
 
+.containerGames{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); 
+  justify-items: center;
+  align-content: center; 
+  gap: 20px; 
+  height: 100vh; 
+  padding: 9%;
+}
+
+.item {
+  background-color: #ccc; 
+  text-align: center;
+  line-height: 100px;
+  width: 100px;
+  height: 100px; 
+}
+
+.brClass{
+    border: 1px ;
+    margin: 5px;
+    padding: 1px;
+    height: 1px;
+    background: #fed057;
+}
+
+
+.card {
+  width: 267px;
+  height: 374px;
+  border-radius: 20px;
+  position: relative;
+  padding: 1.8rem;
+  border: 2px solid #c3c6ce;
+  transition: 0.5s ease-out;
+  overflow: visible;
+ }
+ 
+ .card-details {
+  color: black;
+  height: 100%;
+  gap: .5em;
+  display: grid;
+  place-content: center;
+ }
+ 
+ .card-button {
+  transform: translate(-50%, 125%);
+  width: 60%;
+  border-radius: 1rem;
+  border: none;
+  background-color: #008bf8;
+  color: #fff;
+  font-size: 1rem;
+  padding: .5rem 1rem;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  opacity: 0;
+  transition: 0.3s ease-out;
+ }
+ 
+ .text-body {
+  color: rgb(134, 134, 134);
+ }
+ 
+ /*Text*/
+ .text-title {
+  font-size: 1.5em;
+  font-weight: bold;
+ }
+ 
+ .containerG {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Adjust the height as needed */
+}
+
+.rectangle {
+  width: 600px; /* Set the width of the rectangles */
+  height: 300px; /* Set the height of the first rectangle */
+  background-color: #fed057; /* Background color for the first rectangle */
+  border: 2px solid #1d1d1f; /* Border for the first rectangle */
+  margin-bottom: 20px; /* Spacing between the rectangles */
+}
+
+/* Styles for the second rectangle */
+.rectangle.rectangle-below {
+  margin-top: 2%;
+  height: 150px; /* Set the height of the second rectangle */
+  background-color: transparent; /* Background color for the second rectangle */
+  border: 2px solid #fed057; /* Border color for the second rectangle */
+}
+
+iframe{
+  margin-top: 2%;
+}
+
+.link {
+  font-family: monospace;
+  border: solid 2px;
+  border-color: #fed057;
+  background-color: #1d1d1f;
+  width: 100%;
+  color: #fed057;
+  padding: 10px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s, color 0.3s; /* Add a smooth transition effect */
+}
+
+.link:focus{
+  outline: #fed057;
+}
+
+.submitClip {
+  font-family: monospace;
+  border: solid 1px;
+  background: transparent;
+  color: #fed057;
+  width: 100%;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s; /* Add the same transition effect */
+  
+}
+
+.submitClip:hover {
+  background-color: #fed057; /* Change the background color on hover */
+  color: #1d1d1f; /* Change the text color on hover */
+}
+
+.submit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.submitText {
+  text-align: center; /* Center text horizontally */
+  margin-bottom: 20px; /* Add some margin below the text */
+}
+
+.game-dropdown{
+  font-family: monospace;
+  border: solid 1px;
+  border-radius: 2px;
+  background: transparent;
+  color: #fed057;
+  width: 100%;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  margin-bottom: 2%;
+}
+
+.game-dropdown option {
+  background-color: #fff;
+  color: #333;
+}

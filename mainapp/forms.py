@@ -49,6 +49,13 @@ class LoginForm(forms.Form):
 
 
 class fetch(forms.Form):
-    link = forms.CharField(max_length=100)
+    link = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(attrs={
+            'class': 'link',
+            'placeholder': 'Link'
+        })
+    )
+
     class Meta:
-        model = links
+        fields = ("link",)

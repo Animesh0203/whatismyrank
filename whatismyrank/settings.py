@@ -70,6 +70,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -140,3 +141,9 @@ EMAIL_HOST_USER = "behindyourcloset@gmail.com"
 EMAIL_HOST_PASSWORD = "frqvvzpwrlzkwvvm"
 
 STATICFILES_DIRS = [ os.path.join(BASE_DIR,'static')]
+
+LOGIN_URL = '/register/'
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

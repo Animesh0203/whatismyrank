@@ -57,6 +57,12 @@ class Account(AbstractBaseUser):
         return True
 	
 class links(models.Model):
-	img = models.CharField(max_length=200,default='')
-	name = models.CharField(max_length=100,default='')
-	link = models.CharField(max_length=100, primary_key=True)
+	link = models.CharField(max_length=100)
+ 
+class Game(models.Model):
+    name = models.CharField(max_length=100)
+    # image_url = models.URLField()
+    image_url = models.ImageField(upload_to="Assets/")
+
+    def __str__(self):
+        return self.name
