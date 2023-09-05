@@ -1,0 +1,21 @@
+{% extends 'mainapp/home.html' %}
+
+{% block content %}
+<div class="submit">
+    <h1 class="submitText">Submit Your Clip!</h1>
+    <form method="POST" novalidate>
+        {% csrf_token %}
+
+        <!-- Add the dropdown menu here with the desired CSS classes -->
+        <select name="game" class="game-dropdown form-control">
+            <option value="" disabled selected>Select a Game</option>
+            {% for game in form.game.choices %}
+                <option value="{{ game.0 }}">{{ game.1 }}</option>
+            {% endfor %}
+        </select>
+
+        {{ form.link }}
+        <input type="Submit" class="submitClip" value="Submit">
+    </form>
+</div>
+{% endblock %}
