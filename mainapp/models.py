@@ -41,7 +41,6 @@ class Account(AbstractBaseUser):
     is_staff				= models.BooleanField(default=False)
     is_superuser			= models.BooleanField(default=False)
 
-
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 
@@ -57,6 +56,4 @@ class Account(AbstractBaseUser):
         return True
 	
 class links(models.Model):
-	img = models.CharField(max_length=200,default='')
-	name = models.CharField(max_length=100,default='')
-	link = models.CharField(max_length=100, primary_key=True)
+	link = models.CharField(max_length=100)
