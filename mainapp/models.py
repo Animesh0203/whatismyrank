@@ -57,4 +57,6 @@ class Account(AbstractBaseUser):
         return True
 	
 class links(models.Model):
-	link = models.CharField(max_length=100)
+	img = models.CharField(max_length=200,default='')
+	name = models.CharField(max_length=100,default='')
+	link = models.CharField(max_length=100, primary_key=True)
