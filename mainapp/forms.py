@@ -41,13 +41,11 @@ class SignUpForm(UserCreationForm):
         super().__init__(*args, **kwargs)
         self.fields['email'].help_text = "Enter a valid email address"
 
+
+
 class LoginForm(forms.Form):
     email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Email', 'style': 'width: 300px;', 'class': 'flip-card__input'}))
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password', 'style': 'width: 300px;', 'class': 'flip-card__input'}))
-
-
-
-
 
 
 class fetch(forms.Form):

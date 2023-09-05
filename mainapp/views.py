@@ -8,6 +8,9 @@ from django.contrib.auth import login, authenticate, logout
 from django.views import View
 from mainapp.forms import LoginForm
 from django.contrib import messages
+from django.urls import reverse_lazy
+from django.contrib.auth.views import PasswordResetView
+from django.contrib.messages.views import SuccessMessageMixin
 
 def homepage(request):
     return render(request, "mainapp/home.html", {})
@@ -27,6 +30,7 @@ def register_user(request):
             return redirect('homepage')
         else:
             messages.error(request, 'Form is not valid. Please check the errors.')
+            print(form.errors)
     else:
         form = SignUpForm()
 
@@ -74,7 +78,7 @@ def login_view(request):
         form = LoginForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data['email']
-            password = form.cleaned_data['password1']  # Use 'password1' instead of 'password'
+            password = form.cleaned_data['password1']
             user = authenticate(email=email, password=password)
 
             if user:
@@ -88,4 +92,14 @@ def login_view(request):
         form = LoginForm()
 
     context['form'] = form
-    return render(request, 'mainapp/register.html', context)
+    return render(request, 'mainapp/login.html', context)
+
+class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
+    template_name = 'mainapp/recoverpassword.html'
+    email_template_name = 'mainapp/password_reset_email.html'
+    subject_template_name = 'mainapp/password_reset_subject.txt'
+    success_message = "We've emailed you instructions for setting your password, " \
+                      "if an account exists with the email you entered. You should receive them shortly." \
+                      " If you don't receive an email, " \
+                      "please make sure you've entered the address you registered with, and check your spam folder."
+    success_url = reverse_lazy(homepage)
