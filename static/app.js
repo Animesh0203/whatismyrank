@@ -97,4 +97,14 @@ $(window).load(function () {
 	window.requestAnimationFrame(svgCurve);
 
 });
+  
+function flipCard() {
+    const checkbox = document.getElementById('flip-card-toggle');
+    const flipCardInner = document.getElementById('flip-card-inner');
 
+    if (checkbox.checked) {
+        flipCardInner.style.transform = 'rotateY(180deg)';
+    } else {
+        flipCardInner.style.transform = 'rotateY(0deg)';
+    }
+}
