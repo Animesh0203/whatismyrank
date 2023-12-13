@@ -41,6 +41,7 @@ class Account(AbstractBaseUser):
     is_staff				= models.BooleanField(default=False)
     is_superuser			= models.BooleanField(default=False)
 
+
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 
@@ -54,6 +55,19 @@ class Account(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
-	
+
+ 
+class Game(models.Model):
+    name = models.CharField(max_length=100)
+    # image_url = models.URLField()
+    image_url = models.CharField(max_length=1000)
+
+    def __str__(self):
+        return self.name
+
 class links(models.Model):
+	name = models.ForeignKey(Game, on_delete=models.CASCADE,default='')
 	link = models.CharField(max_length=100)
+
+	#def __str__(self):
+		#return self.name

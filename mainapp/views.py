@@ -43,15 +43,24 @@ def logout_view(request):
     return redirect('homepage')
 
 def get_id(request):
+    games = Game.objects.all()  # Retrieve all games from the database
+    
+    if request.method == 'POST':
+        request.POST._mutable = True
+        request.POST['link'] = request.POST['link'].replace('https://www.youtube.com/watch?v=', '')
+        game_name = request.POST['game']
+        form = fetch(request.POST)
+        
+        if form.is_valid():
+            cleaned_data = form.cleaned_data
 
-	if request.method == 'POST':
-
-		request.POST._mutable=True
-		request.POST['link'] = request.POST['link'].replace('https://www.youtube.com/watch?v=','')
-
-		form = fetch(request.POST)
-
-		if form.is_valid():
+            obj = links()
+            if game_name == 'Valorant':
+                obj.name_id = 1
+            elif game_name == 'League of Legends':
+                obj.name_id = 2
+            obj.link = cleaned_data['link']
+            obj.save()
 
 			form = form.cleaned_data
 
@@ -93,6 +102,16 @@ def login_view(request):
 
     context['form'] = form
     return render(request, 'mainapp/login.html', context)
+
+@login_required
+def games(request, game_id):
+    
+    if game_id == 1:
+        link = links.objects.filter(name_id = 1).values()
+    elif game_id == 2:
+        link = links.objects.filter(name_id = 2).values()
+    
+    return render(request, 'mainapp/games.html', {'links':link})
 
 class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
     template_name = 'mainapp/recoverpassword.html'

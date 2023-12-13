@@ -1,0 +1,18 @@
+{% extends 'mainapp/home.html' %} 
+{% block content %}
+{% for l in links %}
+  
+    <div class="containerG">
+        <iframe
+          width="1280"
+          height="720"
+          src="https://www.youtube.com/embed/{l}"
+        >
+        </iframe>
+      <div class="rectangle rectangle-below">
+        <!-- Your content for the second rectangle here -->
+      </div>
+    </div>
+    
+{% endfor %}
+{% endblock %}

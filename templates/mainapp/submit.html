@@ -25,4 +25,11 @@
 </body>
 
 
+        <!-- Add the dropdown menu here with the desired CSS classes -->
+        <select name="game" class="game-dropdown form-control">
+            <option value="" disabled selected>Select a Game</option>
+            {% for g in games %}
+                <option value="{{ g.name }}">{{ g.name }}</option>
+            {% endfor %}
+        </select>
 
